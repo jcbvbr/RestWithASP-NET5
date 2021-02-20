@@ -2,7 +2,7 @@
 
 namespace RestWithASPNET.Model.Base
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
         [Column("id")]
         public long Id { get; set; }

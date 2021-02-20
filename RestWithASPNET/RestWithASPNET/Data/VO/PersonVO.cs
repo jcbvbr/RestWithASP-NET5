@@ -1,20 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using RestWithASPNET.Hypermedia;
+using RestWithASPNET.Hypermedia.Abstract;
+using System.Collections.Generic;
 
 namespace RestWithASPNET.Data.VO
 {
-
-    public class PersonVO
+    public class PersonVO : ISupportsHyperMedia
     {
-        [JsonPropertyName("code")]
         public long Id { get; set; }
-        [JsonPropertyName("name")]
-        public string FirstName { get; set; }
-        [JsonPropertyName("last_name")]
-        public string LastName { get; set; }
-        [JsonPropertyName("address")]
-        public string Address { get; set; }
-        [JsonPropertyName("sex")]
-        public string Gender { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Address { get; set; }
+
+        public string Gender { get; set; }
+        public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }

@@ -5,6 +5,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net5.0\RestWithASPNET.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net5.0\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Debug\net5.0\project.razor.json" />
+    <Content Include="obj\Debug\net5.0\RestWithASPNET.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net5.0\staticwebassets\RestWithASPNET.StaticWebAssets.xml" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\RestWithASPNET.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\net5.0\apphost.exe" />
+    <None Include="obj\Debug\net5.0\ref\RestWithASPNET.dll" />
+    <None Include="obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.assets.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.csproj.CopyComplete" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.dll" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.pdb" />
+    <None Include="obj\Debug\net5.0\RestWithASPNET.RazorTargetAssemblyInfo.cache" />
+    <None Include="obj\Debug\net5.0\staticwebassets\RestWithASPNET.StaticWebAssets.Manifest.cache" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\RestWithASPNET.csproj.nuget.g.props" />
+    <None Include="obj\RestWithASPNET.csproj.nuget.g.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Evolve" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
