@@ -8,52 +8,53 @@ namespace RestWithASPNET.Controllers
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class PersonController : ControllerBase
+    public class BookController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
-        private readonly IPersonBusiness _personBusiness;
+        private readonly IBookBusiness _bookBusiness;
 
-        public PersonController(IPersonBusiness personBusiness, ILogger<PersonController> logger)
+        public BookController(ILogger<PersonController> logger, IBookBusiness bookBusiness)
         {
-            _personBusiness = personBusiness;
             _logger = logger;
+            _bookBusiness = bookBusiness;
         }
+
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_personBusiness.FindAll());
+            return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetId(long id)
         {
-            var person = _personBusiness.FindByID(id);
+            var person = _bookBusiness.FindByID(id);
             if (person == null) return NotFound();
 
             return Ok(person);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] Book book)
         {
-            if (person == null) return BadRequest();
+            if (book == null) return BadRequest();
 
-            return Ok(_personBusiness.Create(person));
+            return Ok(_bookBusiness.Create(book));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] Book book)
         {
-            if (person == null) return BadRequest();
+            if (book == null) return BadRequest();
 
-            return Ok(_personBusiness.Update(person));
+            return Ok(_bookBusiness.Update(book));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _personBusiness.Delete(id);
+            _bookBusiness.Delete(id);
             return NoContent();
         }
     }
