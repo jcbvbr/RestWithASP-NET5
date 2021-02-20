@@ -6,7 +6,8 @@ using RestWithASPNET.Services;
 namespace RestWithASPNET.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
