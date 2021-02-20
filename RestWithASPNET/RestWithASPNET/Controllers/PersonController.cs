@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestWithASPNET.Model;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
 using RestWithASPNET.Hypermedia.Filters;
+using System.Collections.Generic;
 
 namespace RestWithASPNET.Controllers
 {
@@ -30,6 +30,10 @@ namespace RestWithASPNET.Controllers
         // Maps GET requests to https://localhost:{port}/api/person
         // Get no parameters for FindAll -> Search All
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -40,6 +44,10 @@ namespace RestWithASPNET.Controllers
         // receiving an ID as in the Request Path
         // Get with parameters for FindById -> Search by ID
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -51,6 +59,9 @@ namespace RestWithASPNET.Controllers
         // Maps POST requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(PersonVO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
@@ -61,6 +72,9 @@ namespace RestWithASPNET.Controllers
         // Maps PUT requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPut]
+        [ProducesResponseType(200, Type = typeof(PersonVO))]        
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -70,7 +84,10 @@ namespace RestWithASPNET.Controllers
 
         // Maps DELETE requests to https://localhost:{port}/api/person/{id}
         // receiving an ID as in the Request Path
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]        
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Delete(long id)
         {
             _personBusiness.Delete(id);
