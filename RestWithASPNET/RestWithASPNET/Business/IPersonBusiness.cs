@@ -1,4 +1,5 @@
 ﻿using RestWithASPNET.Data.VO;
+using RestWithASPNET.HyperMedia.Utils;
 using System.Collections.Generic;
 
 namespace RestWithASPNET.Business
@@ -11,5 +12,7 @@ namespace RestWithASPNET.Business
         PersonVO Update(PersonVO person);
         void Delete(long id);
         PersonVO Disable(long id);
+        List<PersonVO> FindByName(string firstname, string lastname);
+        PagedSearchVO<PersonVO> FindWithPagedSearch(string name, string sortDirection, int pagesize, int page);
     }
 }

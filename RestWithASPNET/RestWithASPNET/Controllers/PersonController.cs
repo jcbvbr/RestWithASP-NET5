@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
 using RestWithASPNET.Hypermedia.Filters;
+using RestWithASPNET.HyperMedia.Utils;
 using System.Collections.Generic;
 
 namespace RestWithASPNET.Controllers
@@ -30,15 +31,15 @@ namespace RestWithASPNET.Controllers
 
         // Maps GET requests to https://localhost:{port}/api/person
         // Get no parameters for FindAll -> Search All
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<PersonVO>))]
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
+        [ProducesResponseType(200, Type = typeof(PagedSearchVO<PersonVO>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string name, string sortDirection, int pageSize, int page)
         {
-            return Ok(_personBusiness.FindAll());
+            return Ok(_personBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
 
         // Maps GET requests to https://localhost:{port}/api/person/{id}
@@ -53,6 +54,19 @@ namespace RestWithASPNET.Controllers
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindByID(id);
+            if (person == null) return NotFound();
+            return Ok(person);
+        }
+
+        [HttpGet("findPersonByName")]
+        [ProducesResponseType(200, Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult FindPersonByName([FromQuery]string firstname, [FromQuery]string lastname)
+        {
+            var person = _personBusiness.FindByName(firstname, lastname);
             if (person == null) return NotFound();
             return Ok(person);
         }

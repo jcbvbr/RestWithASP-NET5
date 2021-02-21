@@ -1,6 +1,6 @@
 ﻿using RestWithASPNET.Data.Converter.Implementations;
 using RestWithASPNET.Data.VO;
-using RestWithASPNET.Model;
+using RestWithASPNET.HyperMedia.Utils;
 using RestWithASPNET.Repository;
 using System.Collections.Generic;
 
@@ -23,6 +23,34 @@ namespace RestWithASPNET.Business.Implementations
         public List<PersonVO> FindAll()
         {
             return _converter.Parse(_repository.FindAll());
+        }
+
+        public PagedSearchVO<PersonVO> FindWithPagedSearch(string name, string sortDirection, int pagesize, int page)
+        {
+            var sort = (!string.IsNullOrWhiteSpace(sortDirection) && !sortDirection.Equals("desc")) ? "asc" : "desc";
+            var size = (pagesize < 1) ? 10 : pagesize;
+            var offset = page > 0 ? (page - 1) * size : 0;
+
+            string filter = string.Empty;
+            string order = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(name)) 
+                filter = $"WHERE P.FIRST_NAME LIKE '%{name}%'";
+            
+            order = $"ORDER BY P.FIRST_NAME {sort} LIMIT {size} OFFSET {offset}";
+            
+            string query = $"SELECT * FROM PERSON P {filter} {order}";
+            string countQuery = $"SELECT COUNT(1) FROM PERSON P {filter}";
+
+            var persons = _repository.FindWithPagedSearch(query);
+            int totalResults = _repository.GetCount(countQuery);
+            return new PagedSearchVO<PersonVO> { 
+                CurrentPage = page,
+                List = _converter.Parse(persons),
+                PageSize = size,
+                SortDirections = sort,
+                TotalResults = totalResults
+            };
         }
 
         // Method responsible for returning one person by ID
@@ -59,5 +87,12 @@ namespace RestWithASPNET.Business.Implementations
 
             return person;
         }
+
+        public List<PersonVO> FindByName(string firstname, string lastname)
+        {
+            return _converter.Parse(_repository.FindByName(firstname, lastname));
+        }
+
+        
     }
 }
