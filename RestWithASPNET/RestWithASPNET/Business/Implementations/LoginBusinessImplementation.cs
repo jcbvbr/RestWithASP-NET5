@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNET.Business.Implementations
 {
-    public class LoginBusiness : ILoginBusiness
+    public class LoginBusinessImplementation : ILoginBusiness
     {
         private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
         private TokenConfiguration _configuration;
@@ -19,7 +19,7 @@ namespace RestWithASPNET.Business.Implementations
         private IUserRepository _repository;
         private readonly ITokenService _tokenService;
 
-        public LoginBusiness(TokenConfiguration configuration, IUserRepository repository, ITokenService tokenService)
+        public LoginBusinessImplementation(TokenConfiguration configuration, IUserRepository repository, ITokenService tokenService)
         {
             _configuration = configuration;
             _repository = repository;

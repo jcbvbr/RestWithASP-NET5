@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace RestWithASPNET
 {
@@ -127,10 +128,12 @@ namespace RestWithASPNET
                     });
             });
 
-            //Dependency Injection
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddTransient<ILoginBusiness, LoginBusiness>();
+            services.AddTransient<ILoginBusiness, LoginBusinessImplementation>();
+            services.AddTransient<IFileBusiness, FileBusinessImplementation>();
 
             services.AddTransient<ITokenService, TokenService>();
 
