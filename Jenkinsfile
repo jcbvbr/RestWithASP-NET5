@@ -4,6 +4,7 @@ pipeline {
     stage('Inicial') {
       steps {
         echo 'Iniciando a pipeline'
+        sh 'dotnet build'
       }
     }
 
