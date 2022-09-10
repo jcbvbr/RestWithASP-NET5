@@ -1,11 +1,11 @@
 pipeline {
   agent any
+  
   stages {
-    stage('build') {
+    stage ('Inicial') {
       steps {
-        load 'RestWithASP-NET5/RestWithASPNET'
+        echo 'Iniciando a pipeline'
       }
     }
-
   }
 }
